@@ -3,8 +3,12 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err);
+};
 export default new Router({
-    mode:'history',
+    mode: 'history',
     routes: [
         {
             path: '/',
@@ -32,6 +36,18 @@ export default new Router({
                     path: '/blog/markdownecho',
                     component: () => import('../views/layout/MarkdownEcho.vue'),
                     meta: { title: '博客回显' }
+                },
+                {
+                    // markdown 我的博客
+                    path: '/blog/myblog',
+                    component: () => import('../views/layout/MyBlog.vue'),
+                    meta: { title: '我的博客' }
+                },
+                {
+                    // 个人主页
+                    path: '/userInfo',
+                    component: () => import('../views/layout/userInfo.vue'),
+                    meta: { title: '个人主页' }
                 }
             ]
         },

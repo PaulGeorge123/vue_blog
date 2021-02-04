@@ -2,7 +2,12 @@
     <div>
         <div class="container">
             <div class="plugins-tips title">
-                YG博客 -- 博客详情
+                <div class="bk">
+                    <span>YG博客 -- 博客详情</span>
+                    <el-tag class="el-tag-style">作者:{{Blog.author}}</el-tag>
+                    <el-tag class="el-tag-style" type="warning">类别:{{Blog.category}}</el-tag>
+                    <el-tag class="el-tag-style" type="success">时间: {{Blog.datetime | formatDate}}</el-tag>
+                </div>
                 <el-link type="warning" @click="returnBlogList"><i class="el-icon-back"></i>返回博客列表 </el-link>
             </div>
             <!-- 文章内容块 -->
@@ -35,7 +40,10 @@
             return {
                 Blog: {
                     title: '',
-                    html: ''
+                    html: '',
+                    author:'',
+                    datetime:'',
+                    category:''
                 },
                 // 添加Markdown Model
                 addMarkdownModel: false,
@@ -74,6 +82,9 @@
                 //将返回的数据赋值给Blog
                 this.Blog.title = res.data.title;
                 this.Blog.html = res.data.content;
+                this.Blog.author = res.data.author;
+                this.Blog.datetime = res.data.datetime;
+                this.Blog.category = res.data.category;
                 loading.close();
             },
 
@@ -108,5 +119,13 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+    }
+    .bk {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .el-tag-style{
+        margin-left: 10px;
     }
 </style>

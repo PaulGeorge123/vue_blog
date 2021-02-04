@@ -116,11 +116,13 @@
             },
             // 上传Markdown文件
             async postMd() {
+                let authorId = Number(this.nickname);
                 let res = await uploadMarkdownFile({
                     username: this.username,
                     content: this.html,
                     title: this.form.title,
-                    category: this.form.category
+                    category: this.form.category,
+                    authorId: authorId
                 });
                 this.isSuccess = res.code === 200;
             },
@@ -162,7 +164,7 @@
                 }
             },
 
-            //一键置顶
+            //返回主页
             topBlog(){
                 this.$router.push('/index');
             }

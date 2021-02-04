@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="tips">
-            <i class="iconfont icon-boke1-copy"></i>YG博客 -- 博客列表
+            YG博客 -- {{username}}的博客
         </div>
 
         <!-- 文章内容块 -->
@@ -33,25 +33,27 @@
                     :page-size="query.pageSize"
                     :pager-count="11"
                     layout="prev, pager, next"
-                    :total="query.pageTotal"
-                    @current-change="handlePageChange">
+                    :total="query.pageTotal">
             </el-pagination>
         </div>
+        <el-tooltip placement="top" content="返回首页">
+            <div class="el-backtop" style="right: 40px; bottom: 40px;" visibility-height="600"
+                 @click="topBlog"><i class="el-icon-back"></i></div>
+        </el-tooltip>
     </div>
 </template>
 
 <script>
-    import vFooter from '../../components/common/Footer.vue';
-    import bus from '../../components/common/bus';
-    import {
-        queryBlogAllList, queryByTitleBlogList
-    } from '../../service/api';
+    import { queryByAuthorBlogList } from '../../service/api';
 
     export default {
-        name: 'blogall',
-        components: { vFooter },
+        name: 'MyBlog',
         data() {
             return {
+                //昵称
+                nickname: '',
+                //用户名
+                username: '',
                 blogList: [],
                 blog: {
                     attention: 1,
@@ -70,26 +72,29 @@
                     //当前页 index
                     pageIndex: 1,
                     //每页的数量
-                    pageSize: 5,
+                    pageSize: 7,
                     //总记录数
                     pageTotal: 0
                 }
             };
         },
         async created() {
-            await this.getBlogAllList();
-            await this.getSearchInfo();
+            this.username = this.$cookieStore.getCookie('username');
+            this.nickname = this.$cookieStore.getCookie('nickname');
+            await this.getByAuthorBlogList();
         },
         methods: {
             //获取所有Blog
-            async getBlogAllList() {
+            async getByAuthorBlogList() {
+                let authorId = Number(this.nickname);
                 let loading = this.$loading({
                     lock: true,
                     text: 'Loading',
                     spinner: 'el-icon-loading',
                     background: 'rgba(0, 0, 0, 0.7)'
                 });
-                let res = await queryBlogAllList({
+                let res = await queryByAuthorBlogList({
+                    authorId: authorId,
                     pageNum: this.query.pageIndex,
                     pageSize: this.query.pageSize
                 });
@@ -109,37 +114,10 @@
                 });
             },
 
-            //获取搜索信息
-            getSearchInfo() {
-                bus.$on('searchInfo', res => {
-                    this.$router.push({ path: '/index' });
-                    this.getSearchBlog(res);
-                });
-            },
-
-            //搜索符合条件的博客
-            async getSearchBlog(searchInfo) {
-                let loading = this.$loading({
-                    lock: true,
-                    text: 'Loading',
-                    spinner: 'el-icon-loading',
-                    background: 'rgba(0, 0, 0, 0.7)'
-                });
-                let res = await queryByTitleBlogList({
-                    title: searchInfo,
-                    pageNum: this.query.pageIndex,
-                    pageSize: this.query.pageSize
-                });
-                this.blogList = res.data.list;
-                this.query.pageSize = res.data.pageSize;
-                this.query.pageTotal = res.data.total;
-                loading.close();
-            },
-
-            // 分页导航
-            handlePageChange(val) {
-                this.query.pageIndex = val;
-            },
+            //返回主页
+            topBlog() {
+                this.$router.push('/index');
+            }
         }
     };
 </script>
@@ -151,10 +129,6 @@
         margin-top: 15px;
         margin-bottom: 10px;
         border-radius: 5px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
     }
 
     .footer {
@@ -211,18 +185,6 @@
         width: 0 !important;
         height: 0;
     }
-
-    .icon-boke1-copy {
-        /*color: blue;*/
-        font-size: 30px;
-        margin-right: 10px;
-    }
-
-    .icon-GroupCopy {
-        /*color: #409EFF;*/
-        margin-right: 1px;
-    }
-
 
     .no-data {
         height: 500px;

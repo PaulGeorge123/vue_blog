@@ -21,6 +21,11 @@ export async function modifyPassword(reqData) {
     return Api.modifyPassword(reqData);
 }
 
+//根据id查询用户
+export async function queryUserById(reqData) {
+    return Api.queryUserById(reqData);
+}
+
 
 /**
  * 博客 Blog API
@@ -45,4 +50,19 @@ export async function queryBlogById(reqData) {
 //MongoDB 查询所有
 export async function queryBlogAllList() {
     return Api.queryBlogAllList();
+}
+
+//MongoDB 精准查询（作者）
+export async function queryByAuthorBlogList(reqData) {
+    return Api.queryByAuthorBlogList(reqData);
+}
+
+//MongoDB 模糊查询博客
+export async function queryFuzzyBlog(reqData) {
+    return Api.queryFuzzyBlog(reqData);
+}
+
+//MongoDB 模糊查询title
+export async function queryByTitleBlogList(reqData) {
+    return Api.queryByTitleBlogList(reqData);
 }

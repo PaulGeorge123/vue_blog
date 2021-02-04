@@ -28,7 +28,7 @@
                                  <i class="el-icon-arrow-down el-icon--right"></i>
                             </span>
                             <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item divided command="modifyPassword">修改密码</el-dropdown-item>
+                                <el-dropdown-item divided command="userInfo">个人信息</el-dropdown-item>
                                 <el-dropdown-item divided command="loginOut">退出登录</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
@@ -98,6 +98,7 @@
             if (username !== null && username !== '') {
                 this.isLogin = true;
             }
+            this.setRegular(23);
         },
         methods: {
             // 用户名下拉菜单选择事件
@@ -105,7 +106,8 @@
                 if (command === 'loginOut') {
                     this.loginOut();
                 }
-                if (command === 'modifyPassword') {
+                if (command === 'userInfo') {
+                    this.$router.push({ path: '/userInfo' });
                 }
             },
 
@@ -113,6 +115,7 @@
             openLoginModel() {
                 this.showModel = true;
             },
+
             //关闭登录 Login Model
             closeLoginModel() {
                 this.showModel = false;
@@ -171,6 +174,7 @@
                     this.$cookieStore.removeCookie('id');
                     this.isLogin = false;
                     loading.close();
+                    this.indexView();
                     this.$message({
                         type: 'success',
                         message: '注销账号成功'
@@ -189,8 +193,39 @@
             },
 
             //搜索
-            search(){
-                console.log(this.searchInfo);
+            search() {
+                //$emit这个方法会触发一个事件
+                bus.$emit("searchInfo",this.searchInfo);
+            },
+
+            /*
+              定时清除cookie
+              入参是目标时间的小时数，取值0-23，当然可以根据需要拓展成分钟数，这里主要是提供思路所以从简
+             */
+            setRegular(targetHour) {
+                let timeInterval, nowTime, nowSeconds, targetSeconds;
+                nowTime = new Date();
+                // 计算当前时间的秒数
+                nowSeconds = nowTime.getHours() * 3600 + nowTime.getMinutes() * 60 + nowTime.getSeconds();
+                // 计算目标时间对应的秒数
+                targetSeconds = targetHour * 3600;
+                //  判断是否已超过今日目标小时，若超过，时间间隔设置为距离明天目标小时的距离
+                timeInterval = targetSeconds > nowSeconds ? targetSeconds - nowSeconds : targetSeconds + 24 * 3600 - nowSeconds;
+                setTimeout(this.removeCookie, timeInterval * 1000);
+            },
+
+            //清除cookie
+            removeCookie(){
+                // let keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+                // if(keys) {
+                //     for(let i = keys.length; i--;)
+                //         document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+                // }
+                this.$cookieStore.removeCookie('username');
+                this.$cookieStore.removeCookie('nickname');
+                this.$cookieStore.removeCookie('id');
+                this.indexView();
+                setTimeout(this.removeCookie,24*3600 * 1000)//之后每天调用一次
             },
         },
         mounted() {
@@ -238,7 +273,7 @@
         margin-right: 80px;
     }
 
-    .header-input2{
+    .header-input2 {
         width: 50%;
     }
 

@@ -3,7 +3,7 @@ module.exports = {
     assetsDir: 'static',
     productionSourceMap: false,
     devServer: {
-        port:8001,
+        port:8088,
         // 跨域
         proxy: {
             '/api':{  //代理标识
