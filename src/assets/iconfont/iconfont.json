@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2902419",
+      "name": "登录",
+      "font_class": "denglu",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
+      "icon_id": "13605804",
+      "name": "注册",
+      "font_class": "zhuce",
+      "unicode": "e765",
+      "unicode_decimal": 59237
+    },
+    {
       "icon_id": "3288548",
       "name": "博客",
       "font_class": "boke1",
@@ -25,13 +39,6 @@
       "font_class": "GroupCopy",
       "unicode": "e601",
       "unicode_decimal": 58881
-    },
-    {
-      "icon_id": "10128197",
-      "name": "标题",
-      "font_class": "biaoti",
-      "unicode": "e602",
-      "unicode_decimal": 58882
     },
     {
       "icon_id": "10402687",
@@ -55,39 +62,11 @@
       "unicode_decimal": 59008
     },
     {
-      "icon_id": "19824420",
-      "name": "拥有者",
-      "font_class": "yongyouzhe-copy",
-      "unicode": "ec84",
-      "unicode_decimal": 60548
-    },
-    {
       "icon_id": "19824421",
       "name": "博客",
       "font_class": "boke1-copy",
       "unicode": "ec85",
       "unicode_decimal": 60549
-    },
-    {
-      "icon_id": "19824422",
-      "name": "博客",
-      "font_class": "boke1-copy1",
-      "unicode": "ec86",
-      "unicode_decimal": 60550
-    },
-    {
-      "icon_id": "19824423",
-      "name": "编写",
-      "font_class": "xiazai43-copy",
-      "unicode": "ec87",
-      "unicode_decimal": 60551
-    },
-    {
-      "icon_id": "16132142",
-      "name": "博客",
-      "font_class": "boke",
-      "unicode": "e61f",
-      "unicode_decimal": 58911
     },
     {
       "icon_id": "3868258",

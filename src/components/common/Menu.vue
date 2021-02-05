@@ -21,10 +21,10 @@
             // 用户名下拉菜单选择事件
             handleCommand(command) {
                 if (command === 'addBlog') {
-                    this.$router.push({ path: '/blog/markdown' });
+                    this.$router.push('/markdown');
                 }
                 if (command === 'myblog') {
-                    this.$router.push({ path: '/blog/myblog' });
+                    this.$router.push('/myblog');
                 }
             },
 

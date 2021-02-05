@@ -33,7 +33,12 @@
                             </el-dropdown-menu>
                         </el-dropdown>
                     </div>
-                    <el-button round plain @click="openLoginModel" v-else><i class="el-icon-position"></i>登录</el-button>
+                    <el-button round plain @click="registered" v-if="!isLogin">
+                        <i class="iconfont icon-zhuce icon-style"></i>注册
+                    </el-button>
+                    <el-button round plain @click="openLoginModel" v-if="!isLogin">
+                        <i class="iconfont icon-denglu icon-style"></i>登录
+                    </el-button>
                 </div>
             </div>
         </div>
@@ -109,6 +114,11 @@
                 if (command === 'userInfo') {
                     this.$router.push({ path: '/userInfo' });
                 }
+            },
+
+            //跳转到登录
+            registered() {
+                this.$router.push('/registered');
             },
 
             //打开登录 Login Model
@@ -195,7 +205,7 @@
             //搜索
             search() {
                 //$emit这个方法会触发一个事件
-                bus.$emit("searchInfo",this.searchInfo);
+                bus.$emit('searchInfo', this.searchInfo);
             },
 
             /*
@@ -215,7 +225,7 @@
             },
 
             //清除cookie
-            removeCookie(){
+            removeCookie() {
                 // let keys = document.cookie.match(/[^ =;]+(?=\=)/g);
                 // if(keys) {
                 //     for(let i = keys.length; i--;)
@@ -225,15 +235,23 @@
                 this.$cookieStore.removeCookie('nickname');
                 this.$cookieStore.removeCookie('id');
                 this.indexView();
-                setTimeout(this.removeCookie,24*3600 * 1000)//之后每天调用一次
-            },
+                setTimeout(this.removeCookie, 24 * 3600 * 1000);//之后每天调用一次
+            }
         },
         mounted() {
 
         }
     };
 </script>
-<style scoped>
+<style scoped lang="scss">
+
+    @mixin flex($flex-direction,$justify-content,$align-items) {
+        display: flex;
+        flex-direction: $flex-direction;
+        justify-content: $justify-content;
+        align-items: $align-items;
+    }
+
     .header {
         box-sizing: border-box;
         width: 100%;
@@ -244,10 +262,7 @@
     }
 
     .header-layout {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        @include flex(row, space-between, center);
     }
 
     .logo {
@@ -278,18 +293,12 @@
     }
 
     .header-body {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
+        @include flex(row, flex-start, center);
         width: 80%;
     }
 
     .header-body2 {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        @include flex(row, center, center);
         width: 80%;
     }
 
@@ -310,5 +319,12 @@
 
     .icon-boke {
         font-size: 28px;
+    }
+    .icon-style{
+        margin-right: 5px;
+    }
+
+    .icon-zhuce .icon-denglu{
+        font-size: small;
     }
 </style>

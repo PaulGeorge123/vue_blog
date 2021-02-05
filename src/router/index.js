@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import { getCookie } from '../utils/cookie';
 
 Vue.use(Router);
 
@@ -7,7 +8,7 @@ const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err);
 };
-export default new Router({
+let router = new Router({
     mode: 'history',
     routes: [
         {
@@ -27,19 +28,19 @@ export default new Router({
                 },
                 {
                     // markdown组件
-                    path: '/blog/markdown',
+                    path: '/markdown',
                     component: () => import('../views/layout/Markdown.vue'),
                     meta: { title: 'markdown编辑器' }
                 },
                 {
                     // markdown 博客回显
-                    path: '/blog/markdownecho',
+                    path: '/markdownecho',
                     component: () => import('../views/layout/MarkdownEcho.vue'),
                     meta: { title: '博客回显' }
                 },
                 {
                     // markdown 我的博客
-                    path: '/blog/myblog',
+                    path: '/myblog',
                     component: () => import('../views/layout/MyBlog.vue'),
                     meta: { title: '我的博客' }
                 },
@@ -48,6 +49,12 @@ export default new Router({
                     path: '/userInfo',
                     component: () => import('../views/layout/userInfo.vue'),
                     meta: { title: '个人主页' }
+                },
+                {
+                    // 注册
+                    path: '/registered',
+                    component: () => import('../views/Registered.vue'),
+                    meta: { title: '注册' }
                 }
             ]
         },
@@ -58,3 +65,24 @@ export default new Router({
         }
     ]
 });
+
+//使用钩子函数对路由进行权限跳转
+// router.beforeEach((to, from, next) => {
+//     document.title = `${to.meta.title}`;
+//     const username = getCookie('username');
+//     console.log(username === '');
+//     if (username === '') {
+//         next({
+//             path: '/index',
+//             query: {
+//                 redirect: to.fullPath
+//             }
+//         });
+//
+//     } else {
+//         next();
+//     }
+//     next();
+// });
+
+export default router;

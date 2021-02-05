@@ -8,10 +8,12 @@
                     <el-tag class="el-tag-style" type="warning">类别:{{Blog.category}}</el-tag>
                     <el-tag class="el-tag-style" type="success">时间: {{Blog.datetime | formatDate}}</el-tag>
                 </div>
-                <el-link type="warning" @click="returnBlogList"><i class="el-icon-back"></i>返回博客列表 </el-link>
+                <el-link type="warning" @click="returnBlogList" :underline="false">
+                    <i class="el-icon-back"></i>返回博客列表
+                </el-link>
             </div>
             <!-- 文章内容块 -->
-            <div class="overflows" style="height: 500px">
+            <div class="overflows" style="height: 530px">
                 <article>
                     <div style="padding:10px" :ishljs="true">
                         <!--                        <h1 class="blog-title" v-text="Blog.title"></h1>-->
@@ -41,9 +43,9 @@
                 Blog: {
                     title: '',
                     html: '',
-                    author:'',
-                    datetime:'',
-                    category:''
+                    author: '',
+                    datetime: '',
+                    category: ''
                 },
                 // 添加Markdown Model
                 addMarkdownModel: false,
@@ -89,21 +91,31 @@
             },
 
             //返回博客列表
-            returnBlogList(){
+            returnBlogList() {
                 this.$router.push({ path: '/index' });
             }
         }
     };
 </script>
 <style scoped>
-    .editor-btn {
-        margin-top: 20px;
+    .container {
+        margin-top: 10px;
+        padding: 20px 30px 20px 30px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .plugins-tips {
+        /*padding: 20px 10px;*/
+        margin-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .overflows {
         overflow-x: scroll;
         white-space: nowrap;
-
     }
 
     ::-webkit-scrollbar {
@@ -119,13 +131,16 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        border-radius: 5px;
     }
+
     .bk {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
     }
-    .el-tag-style{
+
+    .el-tag-style {
         margin-left: 10px;
     }
 </style>

@@ -29,6 +29,11 @@ export default {
         return Axios.get('/api/user/queryUserById', { params: reqData });
     },
 
+    //确定添加用户
+    saveUser(reqData) {
+        return Axios.post('/api/user/saveUser', qs.stringify(reqData));
+    },
+
     /**
      * 博客 Blog API
      * @param reqData
@@ -55,8 +60,8 @@ export default {
     },
 
     //MongoDB 查询所有blog
-    queryBlogAllList() {
-        return Axios.get(`/api/mongodb/queryBlogAllList`);
+    queryBlogAllList(reqData) {
+        return Axios.get(`/api/mongodb/queryBlogAllList`, { params: reqData });
     },
 
     //MongoDB 精准查询（作者）
@@ -72,5 +77,5 @@ export default {
     //MongoDB 模糊查询title
     queryByTitleBlogList(reqData) {
         return Axios.post(`/api/mongodb/queryByTitleBlogList`, qs.stringify(reqData));
-    },
+    }
 };

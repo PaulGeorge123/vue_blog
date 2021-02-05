@@ -26,6 +26,10 @@ export async function queryUserById(reqData) {
     return Api.queryUserById(reqData);
 }
 
+//确定添加用户
+export async function saveUser(reqData) {
+    return Api.saveUser(reqData);
+}
 
 /**
  * 博客 Blog API
@@ -48,8 +52,8 @@ export async function queryBlogById(reqData) {
 }
 
 //MongoDB 查询所有
-export async function queryBlogAllList() {
-    return Api.queryBlogAllList();
+export async function queryBlogAllList(reqData) {
+    return Api.queryBlogAllList(reqData);
 }
 
 //MongoDB 精准查询（作者）

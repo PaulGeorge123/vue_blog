@@ -5,7 +5,7 @@
         </div>
 
         <!-- 文章内容块 -->
-        <div class="overflows" style="height: 500px" v-if="blogList.length>0">
+        <div class="overflows" style="height: 530px" v-if="blogList.length>0">
             <el-card class="box-card" v-for="(item,index) in blogList" :key="item.id">
                 <div slot="header" class="layout">
                     <div>
@@ -32,6 +32,7 @@
             <el-pagination
                     :page-size="query.pageSize"
                     :pager-count="11"
+                    :current-page="query.pageIndex"
                     layout="prev, pager, next"
                     :total="query.pageTotal"
                     @current-change="handlePageChange">
@@ -102,7 +103,7 @@
             //查看博客详情
             moreBlogDetails(id) {
                 this.$router.push({
-                    path: '/blog/markdownecho',
+                    path: '/markdownecho',
                     query: {
                         blogId: id
                     }
@@ -139,6 +140,7 @@
             // 分页导航
             handlePageChange(val) {
                 this.query.pageIndex = val;
+                this.getBlogAllList();
             },
         }
     };
@@ -147,7 +149,7 @@
 <style scoped>
     .tips {
         background: #DCDFE6;
-        padding: 20px 15px;
+        padding: 10px 15px;
         margin-top: 15px;
         margin-bottom: 10px;
         border-radius: 5px;
@@ -196,7 +198,6 @@
     .overflows {
         overflow-x: scroll;
         white-space: nowrap;
-
     }
 
     .ma-left-1 {

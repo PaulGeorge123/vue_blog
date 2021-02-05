@@ -107,7 +107,7 @@
             //查看博客详情
             moreBlogDetails(id) {
                 this.$router.push({
-                    path: '/blog/markdownecho',
+                    path: '/markdownecho',
                     query: {
                         blogId: id
                     }

@@ -7,44 +7,23 @@ import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 import './assets/css/icon.css';
 import './assets/iconfont/iconfont.css';
 import 'babel-polyfill';
-import Moment from 'moment'
-import mavonEditor from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
+import Moment from 'moment';
+import mavonEditor from 'mavon-editor';
+import 'mavon-editor/dist/css/index.css';
 // use
 Vue.use(mavonEditor);
 Vue.prototype.$moment = Moment;
 // 定义全局时间戳过滤器
 Vue.filter('formatDate', function(value) {
-    return Moment(value).format('YYYY-MM-DD HH:mm:ss')
+    return Moment(value).format('YYYY-MM-DD HH:mm:ss');
 });
 Vue.config.productionTip = false;
 Vue.use(ElementUI, {
     size: 'small'
 });
-import {setCookie,getCookie,removeCookie} from './utils/cookie'
-Vue.prototype.$cookieStore = {setCookie,getCookie,removeCookie};
+import { setCookie, getCookie, removeCookie } from './utils/cookie';
 
-//使用钩子函数对路由进行权限跳转
-// router.beforeEach((to, from, next) => {
-//     document.title = `${to.meta.title} | vue-manage-system`;
-//     const username = getCookie('username');
-//     const role = getCookie('role');
-//     if (!role && !username && to.path !== '/login') {
-//         next('/login');
-//     } else if (to.meta.permission) {
-//         // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
-//         role === 'admin' ? next() : next('/login');
-//     } else {
-//         // 简单的判断IE10及以下不进入富文本编辑器，该组件不兼容
-//         if (navigator.userAgent.indexOf('MSIE') > -1 && to.path === '/editor') {
-//             Vue.prototype.$alert('vue-quill-editor组件不兼容IE10及以下浏览器，请使用更高版本的浏览器查看', '浏览器不兼容通知', {
-//                 confirmButtonText: '确定'
-//             });
-//         } else {
-//             next();
-//         }
-//     }
-// });
+Vue.prototype.$cookieStore = { setCookie, getCookie, removeCookie };
 
 new Vue({
     router,
