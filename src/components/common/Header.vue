@@ -320,11 +320,16 @@
     .icon-boke {
         font-size: 28px;
     }
-    .icon-style{
+
+    .icon-style {
         margin-right: 5px;
     }
 
-    .icon-zhuce .icon-denglu{
+    .icon-zhuce {
+        font-size: small;
+    }
+
+    .icon-denglu {
         font-size: small;
     }
 </style>

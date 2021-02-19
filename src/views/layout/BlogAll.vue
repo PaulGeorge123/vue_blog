@@ -33,7 +33,7 @@
                     :page-size="query.pageSize"
                     :pager-count="11"
                     :current-page="query.pageIndex"
-                    layout="prev, pager, next"
+                    layout="total,prev, pager, next"
                     :total="query.pageTotal"
                     @current-change="handlePageChange">
             </el-pagination>

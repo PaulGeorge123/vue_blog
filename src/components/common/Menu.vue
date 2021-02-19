@@ -3,8 +3,11 @@
         <div class="header-link">
             <el-link style="color: white" @click="handleCommand('addBlog')">编写博客</el-link>
         </div>
-        <div>
+        <div class="header-link">
             <el-link style="color: white" @click="handleCommand('myblog')">我的博客</el-link>
+        </div>
+        <div>
+            <el-link style="color: white" @click="handleCommand('wechat')">聊天chat</el-link>
         </div>
     </div>
 </template>
@@ -23,8 +26,11 @@
                 if (command === 'addBlog') {
                     this.$router.push('/markdown');
                 }
-                if (command === 'myblog') {
+                else if (command === 'myblog') {
                     this.$router.push('/myblog');
+                }
+                else if (command === 'wechat'){
+                    this.$router.push('/wechat');
                 }
             },
 

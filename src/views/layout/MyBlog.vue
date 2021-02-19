@@ -32,7 +32,7 @@
             <el-pagination
                     :page-size="query.pageSize"
                     :pager-count="11"
-                    layout="prev, pager, next"
+                    layout="total,prev, pager, next"
                     :total="query.pageTotal">
             </el-pagination>
         </div>

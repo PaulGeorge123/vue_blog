@@ -45,9 +45,15 @@ let router = new Router({
                     meta: { title: '我的博客' }
                 },
                 {
+                    // 聊天
+                    path: '/wechat',
+                    component: () => import('../views/layout/WeChat.vue'),
+                    meta: { title: '聊天' }
+                },
+                {
                     // 个人主页
                     path: '/userInfo',
-                    component: () => import('../views/layout/userInfo.vue'),
+                    component: () => import('../views/layout/UserInfo.vue'),
                     meta: { title: '个人主页' }
                 },
                 {

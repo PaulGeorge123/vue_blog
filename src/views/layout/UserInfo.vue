@@ -27,7 +27,7 @@
                 </el-switch>
             </div>
             <div>
-                <el-form :model="userInfo" status-icon :rules="rules" ref="ruleForm" label-width="100px"
+                <el-form :model="userInfo" status-icon :rules="rules" ref="userInfo" label-width="100px"
                          class="demo-ruleForm">
                     <el-form-item :label="isShowPassword?'原密码':'密码'" prop="password">
                         <el-input type="password" v-model="userInfo.password" :disabled="!isShowPassword"
@@ -115,8 +115,7 @@
 
             //重置密码
             reset() {
-                this.userInfo.password = '';
-                this.userInfo.newPassword = '';
+                this.$refs.userInfo.resetFields();
             }, //是否修改密码
             changeSwitch(switchVal) {
                 this.isShowPassword = switchVal !== 0;

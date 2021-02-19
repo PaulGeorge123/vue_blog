@@ -48,4 +48,9 @@
         width: 60%;
         height: 100%;
     }
+
+
+    .el-notification{
+        width: 260px;
+    }
 </style>

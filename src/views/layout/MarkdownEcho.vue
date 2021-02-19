@@ -16,8 +16,9 @@
             <div class="overflows" style="height: 530px">
                 <article>
                     <div style="padding:10px" :ishljs="true">
-                        <!--                        <h1 class="blog-title" v-text="Blog.title"></h1>-->
+                        <!-- <h1 class="blog-title" v-text="Blog.title"></h1>-->
                         <!-- 用<mavon-editor>标签显示文章内容 -->
+                        <!-- <mavon-editor codeStyle="monokai" v-html="Blog.html" style="padding:20px;margin-top: 10px;">-->
                         <mavon-editor v-html="Blog.html" style="padding:20px;margin-top: 10px;">
                         </mavon-editor>
                     </div>
